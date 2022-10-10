@@ -4,7 +4,7 @@
     ^^from google not my words, I wish I was this elegant at speaking
  */
 const questionDisplay = document.querySelector('#questions')
-const answerDisplay = document.querySelector('#answers')
+const answersDisplay = document.querySelector('#answers')
 
 const questions = [
     {
@@ -39,7 +39,7 @@ const questions = [
     },
     {
         id: 1,
-        text: "Pick your an animal from below",
+        text: "Pick your an animal from below:",
         answers: [
             {
                 text: "Butterfly",
@@ -61,7 +61,7 @@ const questions = [
             },
             {
                 text: "Parrot",
-                image: "https://en.wikipedia.org/wiki/File:Rotbugara_2010.JPG",
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Yellow-naped_Amazon.jpg/562px-Yellow-naped_Amazon.jpg",
                 alt: "Green",
                 credit: "Wikipedia"
             }
@@ -90,7 +90,7 @@ const questions = [
                 credit: "Wikipedia"
             },
             {
-                text: "A phone is a phone, which is cheapest",
+                text: "A phone is a phone, whichever is cheapest",
                 image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Telefon_BW_2012-02-18_13-44-32.JPG/440px-Telefon_BW_2012-02-18_13-44-32.JPG",
                 alt: "Classic phone",
                 credit: "Wikipedia"
@@ -145,7 +145,30 @@ const populateQuestion = () => {
         titleHeading.textContent = question.text
         titleBlock.append(titleHeading)
         questionDisplay.append(titleBlock)
+
+        //copy the same process but for answers now
+        const answersBlock = document.createElement('div')
+        answersBlock.id = question.id + 3;
+        answersBlock.classList.add('answer-option')
+
+        question.answers.forEach(answer => {
+            const answerBlock = document.createElement('div')
+            answerBlock.classList.add('answer-block')
+            //answerBlock.addEventListener('click', handleClick())
+            const answerImage = document.createElement('img')
+            answerImage.setAttribute('src', answer.image)
+            answerImage.setAttribute('alt', answer.alt)
+
+            const answerTitle = document.createElement('h3')
+            answerTitle.textContent = answer.text
+
+            answerBlock.append(answerTitle, answerImage)
+            answersBlock.append(answerBlock)
+        })
+        questionDisplay.append(answersBlock)
     })
 }
+
+//const handleClick = () =>{}
 
 populateQuestion()
