@@ -1,0 +1,26 @@
+/*https://fonts.google.com/about used to import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;500&display=swap');
+
+* { /*all*/
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    display: flex; /* had to google this */
+    justify-content: center;
+}
+
+section{
+    width: 600px; /* hard coded for now*/
+}
+
+h1 {
+    font-size: 2.5rem; /*relational font sizing, 1rem == 16px*/
+    line-height: 1.05; /*line-height is important for readability*/
+    text-align: left;
+}
+
+p {
+    font-size: 1.25rem;
+    line-height: 1.25;
+}
