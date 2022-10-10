@@ -49,7 +49,7 @@ const questions = [
             },
             {
                 text: "Beluga Whale",
-                image:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/IOS_wordmark_%282017%29.svg/400px-IOS_wordmark_%282017%29.svg.png",
+                image:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Delphinapterus_leucas_2.jpg/242px-Delphinapterus_leucas_2.jpg",
                 alt: "White",
                 credit: "Wikipedia"
             },
@@ -128,6 +128,10 @@ const questions = [
         ]
     }
 ]
+
+const unansweredQuestions = []; //array
+const answeredQuestions = [];
+
 /* Traditional Anonymous Function
     (function (a, b) {
         return a + b + 100;
@@ -148,13 +152,15 @@ const populateQuestion = () => {
 
         //copy the same process but for answers now
         const answersBlock = document.createElement('div')
-        answersBlock.id = question.id + 3;
+        answersBlock.id = question.id + 4; //cannot reuse 1,2,3,4
         answersBlock.classList.add('answer-option')
+
+        unansweredQuestions.push(question.id) //for handleClick logic
 
         question.answers.forEach(answer => {
             const answerBlock = document.createElement('div')
             answerBlock.classList.add('answer-block')
-            //answerBlock.addEventListener('click', handleClick())
+            answerBlock.addEventListener('click', handleClick(question.id, answer.text)) //TODO not working yet
             const answerImage = document.createElement('img')
             answerImage.setAttribute('src', answer.image)
             answerImage.setAttribute('alt', answer.alt)
@@ -169,6 +175,19 @@ const populateQuestion = () => {
     })
 }
 
-//const handleClick = () =>{}
+function handleClick(questionID, answer) {
+    if (unansweredQuestions.includes(questionID)) {
+    answeredQuestions.push(answer)
+    }
+    const itemToRemove = unansweredQuestions.indexOf(questionID)
+
+    //thanks google
+    if (itemToRemove > -1){
+        unansweredQuestions.splice(itemToRemove, 1)
+    }
+
+    console.log(answeredQuestions)
+    console.log(unansweredQuestions)
+}
 
 populateQuestion()
